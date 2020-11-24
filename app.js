@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const path = require('path');
 const { mongoDbUrl, PORT } = require('./config/config');
+const router = require('./routes/routes');
 
 const app = express();
 
@@ -23,11 +24,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.set('view engine', 'ejs');
 
 // Router
-app.get('/', (req, res) => {
-    res.render('pages/index');
-});
-
+app.use('/', router)
 
 app.listen(PORT, () => {
-    console.log('The port is 3001');
+    console.log(`Server is running on port ${PORT}.`);
 });
