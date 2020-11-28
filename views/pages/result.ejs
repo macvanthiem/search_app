@@ -8,14 +8,12 @@
         <%- include('../partials/header'); %>
     </header>
     <main>
-        <h2>This is content</h2>
-        <p><a href="/create">Create</a></p>
-        <form class="form-inline" action="/" method="post">
-            <div class="form-group mx-sm-3 mb-2">
-                <input type="text" class="form-control" name="content" id="inputPassword2" placeholder="Search ...">
-            </div>
-            <button type="submit" class="btn btn-success mb-2">Go!</button>
-        </form>
+        <h2>Result</h2>
+        <ul>
+            <% datas.forEach(function(data) { %>
+                <li><a href="/detail/<%= data._id %>"><%= data.title %></a></li>
+            <% }); %>
+        </ul>
     </main>
     <footer>
         <%- include('../partials/footer'); %>
