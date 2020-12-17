@@ -13,4 +13,7 @@ router.route('/create')
 router.route('/detail/:id')
     .get(controller.show);
 
+router.route('/test')
+    .get(controller.test);
+
 module.exports = router;

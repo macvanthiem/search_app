@@ -29,6 +29,7 @@ module.exports = {
         newPost.save().then(data => {
             for (let [key, value] of danh_sach) {
                 Word.findOne({title: key}).then(word => {
+                    // console.log(word);
                     if (word) {
                         word.reverse_index_list.push(data);
                         word.save();
@@ -70,6 +71,7 @@ module.exports = {
                 query_if_x_idf.set(key, (1 + Math.log(ln))*value);
             } 
         }
+        // console.log(query_if_x_idf);
         let list_posts = unique(list_posts_has_words);
         let n_posts = list_posts.length;
         // console.log(query_idf);
@@ -95,6 +97,7 @@ module.exports = {
                         if_x_idf.set(key, 0);
                     }
                 }
+
                 let cosine_value = cosine(query_if_x_idf, if_x_idf);
                 cosine_arr.push(cosine_value);
                 cosine_list.set(list_posts[i], cosine_value);
@@ -104,13 +107,13 @@ module.exports = {
         // console.log(cosine_arr);
         // console.log(cosine_list);
         let title_list = mix(cosine_arr, cosine_list);
-        console.log(title_list);
+        // console.log(title_list);
         let datas = new Array();
         for (let i = 0; i < title_list.length; i++) {
             let post = await Post.findOne({title: title_list[i]}).lean();
             datas.push(post);
         }
-        console.log(datas);
+        // console.log(datas);
         res.render('pages/result', {datas: datas});
     },
 
@@ -122,5 +125,73 @@ module.exports = {
         }).catch(error => {
             res.render('pages/404');
         })
+    },
+
+    test: async (req, res) => {
+        let json = require('../public/data/test.json');
+        let json_lenth = json.length;
+        let check = true;
+        console.log(json_lenth);
+        for (let index = 0; index < json_lenth; index++) {
+            console.log(index);
+            let newPost = new Post();
+
+            newPost.title = json[index].title;
+            newPost.date = json[index].date;
+            newPost.desc = json[index].description;
+            newPost.content = json[index].content;
+
+            let content = json[index].content;
+            
+            let danh_sach = count_if(content);
+            // console.log(danh_sach);
+
+            for (let [key, value] of danh_sach) {
+                newPost.normalized_if.push({word: key, _if: value});
+            }
+
+            let data = await newPost.save();
+
+            for (let [key, value] of danh_sach) {
+                let word = await Word.findOne({title: key});
+                // console.log(word);
+                if (word) {
+                    word.reverse_index_list.push(data);
+                    await word.save();
+                } else {
+                    let newWord = new Word();
+                    newWord.title = key;
+                    newWord.reverse_index_list.push(data);
+                    await newWord.save(); 
+                }
+            }
+
+            // newPost.save().then(data => {
+            //     for (let [key, value] of danh_sach) {
+            //         Word.findOne({title: key}).then(word => {
+                        
+            //             if (word) {
+            //                 word.reverse_index_list.push(data);
+            //                 word.save();
+            //             } else {
+            //                 let newWord = new Word();
+            //                 newWord.title = key;
+            //                 newWord.reverse_index_list.push(data);
+            //                 newWord.save(); 
+            //             }
+            //         });
+            //     }
+            // }).catch(error => {
+            //     console.log(error);
+            //     check = false;
+            // })
+        }
+        console.log('done');
+        if (check) {
+            res.redirect('/');
+        } else {
+            res.render('pages/error');
+        }
+        
     }
 }

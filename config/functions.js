@@ -1,18 +1,11 @@
+var natural = require('natural');
+var tokenizer = new natural.AggressiveTokenizerVi({language: "fi"});
 module.exports = {
     count_if: function (content) {
-        content = content.split(" ");
+        content = tokenizer.tokenize(content);
         var n = content.length;
         for (let i = 0; i < n; i++) {
-            content[i] = content[i].toLowerCase();
-            content[i] = content[i].replace('!', '');
-            content[i] = content[i].replace('?', '');
-            content[i] = content[i].replace('.', '');
-            content[i] = content[i].replace(',', '');
-            content[i] = content[i].replace('(', '');
-            content[i] = content[i].replace(')', '');
-            content[i] = content[i].replace(':', '');
-            content[i] = content[i].replace(';', '');
-            
+            content[i] = content[i].toLowerCase();   
         }
         var unique = [...new Set(content)];
         var danh_sach = new Map();
