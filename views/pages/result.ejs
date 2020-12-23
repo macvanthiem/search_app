@@ -1,5 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <head>
    <%- include('../partials/head'); %>
 </head>
@@ -8,12 +10,14 @@
         <%- include('../partials/header'); %>
     </header>
     <main>
-        <h2>Result</h2>
-        <ul>
+        <div class="w3-container" style="margin: 1%;">
+            <h3 style="margin-bottom: 1%;">Result</h3>
+        <ul class="w3-ul w3-border" style="width:50%">
             <% datas.forEach(function(data) { %>
-                <li><a href="/detail/<%= data._id %>"><%= data.title %></a></li>
+                <li class="w3-padding-large"><a href="/detail/<%= data._id %>"><%= data.title %></a></li>
             <% }); %>
         </ul>
+        </div>
     </main>
     <footer>
         <%- include('../partials/footer'); %>

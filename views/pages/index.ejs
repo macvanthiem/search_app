@@ -3,20 +3,289 @@
 <head>
    <%- include('../partials/head'); %>
 </head>
+<style>
+    body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+}
+
+header {
+    width: 100%;
+}
+
+ul {
+    list-style: none;
+}
+
+#nav_bar {
+    float: right;
+}
+
+#nav_bar li {
+    display: inline-block;
+    padding: 8px;
+}
+
+#nav_bar #sign_in {
+    background: #4887ef;
+    margin-right: 25px;
+    padding: 7px 15px;
+    border-radius: 3px;
+    font-weight: bold;
+}
+
+.nav-links {
+    color: #404040;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+li.nav-links a:hover {
+    text-decoration: underline;
+}
+
+#sign_in:hover {
+    box-shadow: 1px 1px 5px #999;
+}
+
+#sign_in {
+    color: #fff;
+}
+
+#image1 {
+    background-position: -132px -38px;
+    background-image: url(image1.png);
+    display: inline-block;
+    vertical-align: middle;
+    box-sizing: border-box;
+    height: 30px;
+    width: 30px;
+}
+
+.google #google_logo {
+    text-align: center;
+    display: block;
+    margin: 0 auto;
+    clear: both;
+    padding-top: 80px;
+    padding-bottom: 20px;
+}
+
+.form {
+    margin: 0 auto;
+    border: 1px solid #dfe1e5;
+    background: #fff;
+    border-radius: 24px;
+    width: 482px;
+    height: 44px;
+    box-shadow: none;
+}
+
+#form1 {
+    width:5%;
+    margin-top: -1%;
+    fill: currentColor;
+    margin-left: 15px;
+    color: #9AA0A6;
+    /* width: 20px; */
+    height: 20px;
+}
+
+#form-search {
+    width: 78%;
+    margin-top: 1%;
+    outline: none;
+    border: none;
+    /* width: 330px; */
+    height: 34px;
+    margin-left: 13px;
+    font: 16px arial, sans-serif;
+}
+
+#image2 {
+    padding-left: 8px;
+    padding-right: 8px;
+    padding-bottom: 3px;
+}
+
+#image3 {
+    width: 24px;
+    height: 24px;
+}
+
+.form #form-search {
+    padding: 0 8px;
+}
+
+.form:hover {
+    box-shadow: 1px 1px 5px #999;
+}
+
+.buttons {
+    text-align: center;
+    padding-top: 30px;
+    margin-bottom: 300px;
+}
+
+.button1 {
+    background-color: #f2f2f2;
+    border: 1px solid #f2f2f2;
+    border-radius: 4px;
+    color: #5F6368;
+    font-family: arial, sans-serif;
+    font-size: 14px;
+    margin: 0px 4px;
+    padding: 0 16px;
+    line-height: 27px;
+    height: 36px;
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.button1:hover {
+    box-shadow: 1px 1px 5px #999;
+}
+
+.link1 :visited {
+    color: #609;
+}
+
+footer {
+    background: #f2f2f2;
+    border-top: solid 2px #e4e4e4;
+    position: fixed;
+    bottom: 0;
+    padding-bottom: 0;
+    width: 100%;
+}
+
+footer ul li {
+    display: inline;
+    color: #666666;
+    font-size: 14px;
+    padding: 13px;
+}
+
+footer ul {
+    float: left;
+    padding: 1px;
+}
+
+footer ul a:hover {
+    text-decoration: underline;
+}
+
+.footer-left1 {
+    width: 100%;
+    border-bottom: solid 2px #e4e4e4;
+    height: 34px;
+}
+
+.footer-left2 {
+    margin-top: 0px;
+}
+
+.footer-right {
+    float: right;
+    margin-top: 0px;
+}
+
+@media screen and (max-width: 400px) {
+    li.nav-links a {
+        display: none;
+    }
+    #google_logo {
+        padding: 0;
+    }
+    .buttons {
+        display: none;
+    }
+    #form-search {
+        width: 80%;
+    }
+    footer {
+        bottom: 0;
+    }
+    footer ul {
+        float: none;
+        padding-bottom: 2px;
+    }
+    .footer-left2 {
+        text-align: center;
+        margin: auto;
+        padding-top: 10px;
+    }
+    .footer-right {
+        float: none;
+        text-align: center;
+    }
+}
+
+@media screen and (max-width: 565px) {
+    li.nav-links a {
+        display: none;
+    }
+    #google_logo {
+        padding: 0;
+    }
+    .buttons {
+        display: none;
+    }
+    #form-search {
+        width: 80%;
+    }
+    footer {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        height: 60px;
+    }
+    footer ul {
+        float: none;
+        padding-bottom: 2px;
+    }
+    .footer-left2 {
+        text-align: center;
+        margin: auto;
+        padding-top: 10px;
+    }
+    .footer-right {
+        float: none;
+        text-align: center;
+    }
+}
+</style>
 <body>
     <header>
         <%- include('../partials/header'); %>
     </header>
     <main>
-        <h2>This is content</h2>
-        <p><a href="/create">Create</a></p>
-        <p><a href="/test">Async</a></p>
-        <form class="form-inline" action="/" method="post">
-            <div class="form-group mx-sm-3 mb-2">
-                <input type="text" class="form-control" name="content" id="inputPassword2" placeholder="Search ...">
+        <div class="google">
+            <div id="google_logo">
+                <img src="https://www.google.com.vn/logos/doodles/2020/december-holidays-days-2-30-6753651837108830.3-law.gif" >
             </div>
-            <button type="submit" class="btn btn-success mb-2">Go!</button>
-        </form>
+        </div>
+        <form class="form-inline" action="/" method="post">
+        <div class="form">
+            <svg id="form1">
+                <path
+                    d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z">
+                </path>
+            </svg>
+            <span>
+                <input type="text" name="content" id="form-search">
+            </span>
+        </div>
+    </form>
+        <div class="buttons">
+            <!-- <button type="submit" class="btn btn-success mb-2">Go!</button> -->
+            <a href="/create"><input class="button1" type="submit" value="Create" id="google_search"></a>
+            <a href="/test"><input class="button1" type="submit" value="Async" id="im_feeling_lucky"></a>
+        </div>
     </main>
     <footer>
         <%- include('../partials/footer'); %>
