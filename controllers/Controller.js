@@ -71,16 +71,20 @@ module.exports = {
                 query_if_x_idf.set(key, (1 + Math.log(ln))*value);
             } 
         }
+        // console.log("tf*idf of query:");
         // console.log(query_if_x_idf);
         let list_posts = unique(list_posts_has_words);
         let n_posts = list_posts.length;
+        // console.log("idf of query:");
         // console.log(query_idf);
         let cosine_list = new Map();
         let cosine_arr = new Array();
+        // console.log("tf*idf of (post has query):");
         for (let i = 0; i < n_posts; i++) {
             let post_title = list_posts[i];
             let post = await Post.findOne({title: post_title}).lean();
             if (post) {
+                // console.log(post_title);
                 let normalized_if = post.normalized_if;
                 let num_of_normalized_if = normalized_if.length;
                 let if_x_idf = new Map();
@@ -97,6 +101,7 @@ module.exports = {
                         if_x_idf.set(key, 0);
                     }
                 }
+                // console.log(if_x_idf);
 
                 let cosine_value = cosine(query_if_x_idf, if_x_idf);
                 cosine_arr.push(cosine_value);
@@ -105,6 +110,7 @@ module.exports = {
         }
         cosine_arr.sort(function(a, b){return b - a});
         // console.log(cosine_arr);
+        // console.log("Cosine:");
         // console.log(cosine_list);
         let title_list = mix(cosine_arr, cosine_list);
         // console.log(title_list);
