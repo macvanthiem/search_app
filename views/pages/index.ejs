@@ -262,6 +262,12 @@ footer ul a:hover {
 <body>
     <header>
         <%- include('../partials/header'); %>
+        <nav style=" margin-top: 15px; margin-right: 15px;">
+            <ul id="nav_bar">
+                <li><a href="/create" class="button1" style="padding-top: 8px; padding-bottom: 8px;">Create</a></li>
+                <li><a href="/test" class="button1" style="padding-top: 8px; padding-bottom: 8px;">Async</a></li>
+            </ul>
+        </nav>
     </header>
     <main>
         <div class="google">
@@ -269,7 +275,7 @@ footer ul a:hover {
                 <img src="https://www.google.com.vn/logos/doodles/2020/december-holidays-days-2-30-6753651837108830.3-law.gif" >
             </div>
         </div>
-        <form class="form-inline" action="/" method="post">
+        <form class="form-inline" id="form-submit" action="/" method="post">
         <div class="form">
             <svg id="form1">
                 <path
@@ -283,8 +289,7 @@ footer ul a:hover {
     </form>
         <div class="buttons">
             <!-- <button type="submit" class="btn btn-success mb-2">Go!</button> -->
-            <a href="/create"><input class="button1" type="submit" value="Create" id="google_search"></a>
-            <a href="/test"><input class="button1" type="submit" value="Async" id="im_feeling_lucky"></a>
+            <a href="/create"><input class="button1" type="submit" form="form-submit" value="Search" id="google_search"></a>
         </div>
     </main>
     <footer>

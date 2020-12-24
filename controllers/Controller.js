@@ -120,7 +120,7 @@ module.exports = {
             datas.push(post);
         }
         // console.log(datas);
-        res.render('pages/result', {datas: datas});
+        res.render('pages/result', {datas: datas, content: content});
     },
 
     show: (req, res) => {
@@ -134,9 +134,8 @@ module.exports = {
     },
 
     test: async (req, res) => {
-        let json = require('../public/data/test.json');
+        let json = require('../public/data/Kinh-doanh.json');
         let json_lenth = json.length;
-        let check = true;
         console.log(json_lenth);
         for (let index = 0; index < json_lenth; index++) {
             console.log(index);
@@ -145,7 +144,8 @@ module.exports = {
             newPost.title = json[index].title;
             newPost.date = json[index].date;
             newPost.desc = json[index].description;
-            newPost.content = json[index].content;
+            newPost.subject = json[index].subject;
+            newPost.url = json[index].link;
 
             let content = json[index].content;
             
@@ -171,33 +171,8 @@ module.exports = {
                     await newWord.save(); 
                 }
             }
-
-            // newPost.save().then(data => {
-            //     for (let [key, value] of danh_sach) {
-            //         Word.findOne({title: key}).then(word => {
-                        
-            //             if (word) {
-            //                 word.reverse_index_list.push(data);
-            //                 word.save();
-            //             } else {
-            //                 let newWord = new Word();
-            //                 newWord.title = key;
-            //                 newWord.reverse_index_list.push(data);
-            //                 newWord.save(); 
-            //             }
-            //         });
-            //     }
-            // }).catch(error => {
-            //     console.log(error);
-            //     check = false;
-            // })
         }
         console.log('done');
-        if (check) {
-            res.redirect('/');
-        } else {
-            res.render('pages/error');
-        }
-        
+        res.redirect('/');  
     }
 }

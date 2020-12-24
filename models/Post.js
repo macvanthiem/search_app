@@ -18,7 +18,12 @@ const PostSchema = new Schema({
         required: false
     },
 
-    content: {
+    subject: {
+        type: String,
+        required: false
+    },
+
+    url: {
         type: String,
         required: true
     },

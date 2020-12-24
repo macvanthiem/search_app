@@ -10,13 +10,19 @@
         <%- include('../partials/header'); %>
     </header>
     <main>
-        <div class="w3-container" style="margin: 1%;">
-            <h3 style="margin-bottom: 1%;">Result</h3>
-        <ul class="w3-ul w3-border" style="width:50%">
-            <% datas.forEach(function(data) { %>
-                <li class="w3-padding-large"><a href="/detail/<%= data._id %>"><%= data.title %></a></li>
-            <% }); %>
-        </ul>
+        <div class="container">
+            <div class="w3-container" style="margin: 1%;">
+                <h3 style="margin-bottom: 15px; margin-top: 15px;">Result of "<%= content %>"</h3>
+                <ul class="w3-ul w3-border">
+                    <% datas.forEach(function(data) { %>
+                        <li class="w3-padding-large">
+                            <h5><a href="<%= data.url %>"><%= data.title %></a></h5>
+                            <p><i><%= data.date %></i></p>
+                            <p><%= data.desc %></p>
+                        </li>
+                    <% }); %>
+                </ul>
+            </div>
         </div>
     </main>
     <footer>
